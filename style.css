@@ -61,11 +61,16 @@ body{
   flex-direction:column;
   gap:4px;
   padding:16px 18px;
+  min-height: 96px;
+  height: 100%;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 12px;
   text-decoration:none;
   color: inherit;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
   transition: background .15s ease, border-color .15s ease, color .15s ease;
 }
 
@@ -76,6 +81,10 @@ body{
 .card__meta{
   font-size: 13.5px;
   color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card:hover,
@@ -83,6 +92,14 @@ body{
   background: var(--line);
   border-color: var(--accent);
   color: var(--ink);
+  overflow: visible;
+  z-index: 3;
+}
+
+.card:hover .card__meta,
+.card:focus-visible .card__meta{
+  -webkit-line-clamp: unset;
+  overflow: visible;
 }
 
 .status{
