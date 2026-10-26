@@ -41,3 +41,29 @@ document.addEventListener('click', (e) => {
   const title = link.querySelector('.card__title')?.textContent?.trim() || 'Link';
   toast(`Apro “${title}” in una nuova scheda…`);
 });
+
+async function checkQrToolServer() {
+  const card = document.getElementById('qr-tool-card');
+  const status = document.getElementById('qr-server-status');
+  if (!card || !status) return;
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
+  try {
+    await fetch(card.dataset.serverUrl, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: controller.signal });
+    status.textContent = 'Server raggiungibile';
+    status.className = 'server-status server-status--online';
+  } catch {
+    card.removeAttribute('href');
+    card.removeAttribute('target');
+    card.setAttribute('aria-disabled', 'true');
+    card.tabIndex = -1;
+    card.classList.add('card--disabled');
+    status.textContent = 'Server offline';
+    status.className = 'server-status server-status--offline';
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+checkQrToolServer();
