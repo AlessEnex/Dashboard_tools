@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crea codici per PDM Monitor</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="pdm-monitor.css" />
+</head>
+<body>
+  <main class="container tool-page">
+    <a class="back-link" href="../index.html">← Torna alla dashboard</a>
+    <header class="header">
+      <h1>Crea codici per PDM Monitor</h1>
+      <p>Inserisci i codici e le descrizioni da inserire nel file per l'importazione ERP.</p>
+    </header>
+
+    <section class="template-panel" aria-labelledby="template-title">
+      <button id="template-toggle" class="template-toggle" type="button" aria-expanded="false" aria-controls="template-content">
+        <span id="template-title">Template evaporatori</span>
+        <span class="toggle-icon" aria-hidden="true">+</span>
+      </button>
+      <div id="template-content" class="template-content" hidden>
+        <div class="template-fields">
+          <label>Anno
+            <input id="year-number" type="number" inputmode="numeric" min="2000" max="9999" step="1" />
+          </label>
+          <label>Numero offerta Roen
+            <input id="offer-number" inputmode="numeric" autocomplete="off" maxlength="20" placeholder="Es. 0371" />
+          </label>
+          <label>Numero revisione Roen
+            <input id="revision-number" type="number" inputmode="numeric" min="0" step="1" placeholder="Es. 1" />
+          </label>
+          <label>Numero di posizioni dell'offerta
+            <input id="positions-number" type="number" inputmode="numeric" min="1" step="1" placeholder="Es. 4" />
+          </label>
+          <button id="generate-template" class="button" type="button">Genera</button>
+        </div>
+        <p class="template-help">Formato: OF<span id="year-code"></span>N[offerta]R[revisione]P[posizione]. Le posizioni iniziano da P000.</p>
+        <div id="generated-list" class="generated-list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="entry-panel" aria-labelledby="righe-title">
+      <div class="panel-heading">
+        <h2 id="righe-title">Articoli</h2>
+        <button id="add-row" class="button button--secondary" type="button">+ Aggiungi riga</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Codice</th><th scope="col">Descrizione</th><th scope="col"><span class="sr-only">Azioni</span></th></tr>
+          </thead>
+          <tbody id="articles-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="export-panel" aria-labelledby="export-title">
+      <div>
+        <h2 id="export-title">Esporta Excel</h2>
+        <p>Il file contiene i fogli <strong>Distinte</strong> e <strong>Articoli</strong>; codici e descrizioni vengono inseriti in Articoli.</p>
+      </div>
+      <div class="export-actions">
+        <label for="filename">Nome file</label>
+        <input id="filename" type="text" value="BOM_0000_2026.xlsx" />
+        <button id="export-excel" class="button" type="button">Esporta Excel ERP</button>
+      </div>
+    </section>
+
+    <footer id="status" class="status" aria-live="polite"></footer>
+  </main>
+
+  <script src="https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="pdm-monitor.js"></script>
+</body>
+</html>

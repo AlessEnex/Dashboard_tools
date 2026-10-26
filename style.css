@@ -74,6 +74,13 @@ body{
   transition: background .15s ease, border-color .15s ease, color .15s ease;
 }
 
+button.card{
+  width:100%;
+  font: inherit;
+  text-align:left;
+  cursor:pointer;
+}
+
 .card__title{
   font-weight: 600;
   font-size: 15.5px;
