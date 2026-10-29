@@ -62,8 +62,9 @@ function exportExcelERP() {
     'lung', 'area', 'Desc_Agg', 'Mag', 'Nomenclatura'
   ]];
 
+  // Celle vuote come null: aoa_to_sheet non le scrive, mentre '' creerebbe celle di testo vuote che l'ERP rifiuta
   articoli.forEach(({ codice, descrizione }) => {
-    articoliData.push([codice, descrizione, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+    articoliData.push([codice || null, descrizione || null]);
   });
 
   XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet(distinteData), 'Distinte');
