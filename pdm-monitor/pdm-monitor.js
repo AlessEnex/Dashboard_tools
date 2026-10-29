@@ -115,7 +115,7 @@ document.getElementById('generate-template').addEventListener('click', () => {
   yearCode = year.slice(-2);
   document.getElementById('year-code').textContent = yearCode;
   const codes = Array.from({ length: positions }, (_, index) =>
-    `OF${yearCode}N${offer}R${revision}P${String(index).padStart(3, '0')}`
+    `OF${yearCode}N${offer}R${revision}P${String(index + 1).padStart(3, '0')}`
   );
 
   generatedList.innerHTML = `<strong>${codes.length} codici generati</strong><ol>${codes.map(code => `<li>${code}</li>`).join('')}</ol>`;
