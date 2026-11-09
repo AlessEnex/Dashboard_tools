@@ -1,20 +1,20 @@
 :root{
-  --bg: #0c0f13;
-  --panel: #161b22;
-  --ink: #e9edf3;
-  --muted: #7d8691;
-  --line: #242a32;
+  --bg: #0b1020;
+  --panel: rgba(25, 32, 49, .62);
+  --ink: #edf2fb;
+  --muted: #9ba8bc;
+  --line: rgba(180, 203, 238, .16);
   --ring: #3b82f6;
   --accent: #3b82f6;
 }
 
 @media (prefers-color-scheme: light){
   :root{
-    --bg: #f7f8fa;
-    --panel: #ffffff;
+    --bg: #eef3fb;
+    --panel: rgba(255, 255, 255, .62);
     --ink: #0e1117;
     --muted: #606770;
-    --line: #e1e4e8;
+    --line: rgba(80, 105, 145, .16);
     --ring: #2563eb;
     --accent: #2563eb;
   }
@@ -26,6 +26,10 @@ body{
   margin:0;
   font: 15px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, Roboto, Segoe UI, system-ui, sans-serif;
   background: var(--bg);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(72, 137, 255, .18), transparent 30rem),
+    radial-gradient(circle at 90% 78%, rgba(101, 76, 211, .14), transparent 28rem);
+  background-attachment: fixed;
   color: var(--ink);
 }
 
@@ -65,13 +69,16 @@ body{
   height: 100%;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   text-decoration:none;
   color: inherit;
   overflow: hidden;
   position: relative;
   z-index: 0;
-  transition: background .15s ease, border-color .15s ease, color .15s ease;
+  box-shadow: 0 10px 30px rgba(4, 10, 25, .12), inset 0 1px rgba(255, 255, 255, .07);
+  backdrop-filter: blur(14px) saturate(125%);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 
 button.card{
@@ -93,6 +100,20 @@ button.card{
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.card__icon{
+  display:grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  margin-bottom:4px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  color:#9bc3ff;
+  background:rgba(78, 136, 238, .11);
+  font-size:16px;
+  font-weight:600;
+  line-height:1;
+}
 .server-status{display:flex;align-items:center;gap:6px;margin-top:auto;font-size:12.5px;font-weight:600}
 .server-status::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
 .server-status--checking{color:var(--muted)}
@@ -102,9 +123,11 @@ button.card{
 
 .card:hover,
 .card:focus-visible{
-  background: var(--line);
-  border-color: var(--accent);
+  background: color-mix(in srgb, var(--panel) 80%, #528cf4 20%);
+  border-color: color-mix(in srgb, var(--accent) 70%, white 30%);
   color: var(--ink);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(4, 10, 25, .22), inset 0 1px rgba(255, 255, 255, .14);
   overflow: visible;
   z-index: 3;
 }
